@@ -3,8 +3,11 @@
 # Atualizar o sistema
 sudo apt update && sudo apt upgrade -y
 
-# Instalar o LXD
-sudo apt install -y lxd
+# Instalar o snapd se não estiver instalado
+sudo apt install -y snapd
+
+# Instalar o LXD via snap
+sudo snap install lxd
 
 # Adicionar o usuário atual ao grupo lxd
 sudo usermod -aG lxd $USER
@@ -40,7 +43,7 @@ cluster: null
 EOF
 
 # Reiniciar o LXD para aplicar as configurações
-sudo systemctl restart lxd
+sudo systemctl restart snap.lxd.daemon
 
 echo "LXD instalado e configurado com sucesso!"
 echo "Acesse a interface web do LXD em https://<seu_ip>:8443"
