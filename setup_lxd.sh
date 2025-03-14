@@ -25,8 +25,7 @@ networks:
   name: lxdbr0
   type: bridge
 storage_pools:
-- config:
-    size: 20GB
+- config: {}
   description: ""
   name: default
   driver: dir
