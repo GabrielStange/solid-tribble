@@ -12,6 +12,9 @@ sudo snap install lxd
 # Adicionar o usuário atual ao grupo lxd
 sudo usermod -aG lxd $USER
 
+# Obter o tamanho do disco disponível
+DISK_SIZE=$(df --output=avail / | tail -n 1 | awk '{print int($1/1024/1024)"GB"}')
+
 # Inicializar o LXD com as configurações desejadas
 cat <<EOF | sudo lxd init --preseed
 config:
@@ -25,7 +28,8 @@ networks:
   name: lxdbr0
   type: bridge
 storage_pools:
-- config: {}
+- config:
+    source: /var/snap/lxd/common/lxd/storage-pools/default
   description: ""
   name: default
   driver: dir
